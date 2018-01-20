@@ -5,12 +5,14 @@ import routes from './routes';
 import {render} from 'react-dom';
 import configureStore from './store/configureStore';
 import {loadCourses} from './actions/courseActions';
+import {loadAuthors} from './actions/authorActions';
 
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const store = configureStore();
 store.dispatch(loadCourses());
+store.dispatch(loadAuthors());
 
 render(
   <Provider store={store}>
