@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseActions';
-import CourseForm from "./courseForm";
+import CourseForm from './courseForm';
 
 class ManageCoursePage extends React.Component {
 
@@ -83,12 +83,12 @@ function mapStateToProps(state, ownProps) {
   const courseId = ownProps.params.id; // This is mapped to the routes segment in routes.js
 
   let course = {
-    id: "",
-    title: "",
-    watchHref: "",
-    authorId: "",
-    length: "",
-    category: ""
+    id: '',
+    title: '',
+    watchHref: '',
+    authorId: '',
+    length: '',
+    category: ''
   };
 
   if (courseId && state.courses.length) {

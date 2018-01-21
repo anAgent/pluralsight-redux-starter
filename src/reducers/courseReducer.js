@@ -5,7 +5,7 @@
  * @returns {*}
  */
 import {CREATE_COURSE_SUCCESS, LOAD_COURSES_SUCCESS, UPDATE_COURSE_SUCCESS} from '../actions/actionTypes';
-import initialState from "./initialState";
+import initialState from './initialState';
 
 export default function courseReducer (state = initialState.courses, action) {
   switch (action.type) {
