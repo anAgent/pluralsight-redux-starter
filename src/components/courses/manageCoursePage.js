@@ -13,14 +13,29 @@ class ManageCoursePage extends React.Component {
       course: Object.assign({}, props.course),
       errors: {}
     };
+
+    this.updateCourseState = this.updateCourseState.bind(this);
+    this.saveCourse = this.saveCourse.bind(this);
   }
 
-  onSave () {
+  updateCourseState(event) {
+    const field = event.target.name;
+    let course = Object.assign({}, this.state.course);
+    course[field] = event.target.value;
 
+    return this.setState({course});
   }
 
-  onChange () {
+  saveCourse(event) {
+    event.preventDefault();
 
+    this.props
+      .actions
+      .saveCourse(this.state.course);
+
+    this.context
+      .router
+      .push('/courses');
   }
 
   render() {
@@ -28,8 +43,8 @@ class ManageCoursePage extends React.Component {
       <div data-component="manageCoursePageComponent">
         <CourseForm
           course={this.state.course}
-          onSave={this.onSave}
-          onChange={this.onChange}
+          onSave={this.saveCourse}
+          onChange={this.updateCourseState}
           errors={this.state.errors}
           allAuthors={this.props.authors}
         />
@@ -40,18 +55,36 @@ class ManageCoursePage extends React.Component {
 
 ManageCoursePage.propTypes = {
   course: PropTypes.object.isRequired,
-  authors: PropTypes.array
+  authors: PropTypes.array,
+  actions: PropTypes.object.isRequired
 };
 
+// Pull in the react Router context so router is available on this.context.router.
+ManageCoursePage.contextTypes = {
+  router: PropTypes.object
+};
+
+function getCourseById(courses, id) {
+  const course = courses.filter(course => course.id === id);
+  return course.length ? course[0] : null;
+}
+
 function mapStateToProps(state, ownProps) {
+
+  const courseId = ownProps.params.id; // This is mapped to the routes segment in routes.js
+
   let course = {
-    id: "react-flux-building-applications",
-    title: "Building Applications in React and Flux",
-    watchHref: "http://www.pluralsight.com/courses/react-flux-building-applications",
-    authorId: "cory-house",
-    length: "5:08",
-    category: "JavaScript"
+    id: "",
+    title: "",
+    watchHref: "",
+    authorId: "",
+    length: "",
+    category: ""
   };
+
+  if (courseId && state.courses.length) {
+    course = getCourseById(state.courses, courseId);
+  }
 
   const authorsFormattedForDropDown = state.authors.map(author => {
     return {

@@ -4,7 +4,7 @@
  * @param action
  * @returns {*}
  */
-import {CREATE_COURSE, LOAD_COURSES_SUCCESS} from '../actions/actionTypes';
+import {CREATE_COURSE_SUCCESS, LOAD_COURSES_SUCCESS, UPDATE_COURSE_SUCCESS} from '../actions/actionTypes';
 import initialState from "./initialState";
 
 export default function courseReducer (state = initialState.courses, action) {
@@ -13,9 +13,15 @@ export default function courseReducer (state = initialState.courses, action) {
     case LOAD_COURSES_SUCCESS:
       return action.courses;
 
-    case CREATE_COURSE:
+    case CREATE_COURSE_SUCCESS:
       return [
         ...state,
+        Object.assign({}, action.course)
+      ];
+
+    case UPDATE_COURSE_SUCCESS:
+      return [
+        ...state.filter(course => course.id !== action.course.id),
         Object.assign({}, action.course)
       ];
 
