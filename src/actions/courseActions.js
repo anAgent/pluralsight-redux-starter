@@ -1,7 +1,7 @@
 
 import {CREATE_COURSE_SUCCESS, LOAD_COURSES_SUCCESS, UPDATE_COURSE_SUCCESS} from './actionTypes';
 import courseApi from '../api/mockCourseApi';
-import {begineAjaxCall} from "./ajaxStatusActions";
+import {beginAjaxCall} from './ajaxStatusActions';
 
 export function createCourseSuccess(course) {
   return {
@@ -27,7 +27,7 @@ export function loadCoursesSuccess(courses) {
 export function loadCourses () {
 
   return function  (dispatch) {
-    dispatch(begineAjaxCall());
+    dispatch(beginAjaxCall());
 
     return courseApi.getAllCourses()
       .then(courses => {
@@ -42,7 +42,7 @@ export function loadCourses () {
 export function saveCourse(course) {
 
   return function (dispatch, getState) {
-    dispatch(begineAjaxCall());
+    dispatch(beginAjaxCall());
 
     return courseApi.saveCourse(course).then(savedCourse => {
 
