@@ -40,8 +40,11 @@ class ManageCoursePage extends React.Component {
 
     this.props
       .actions
-      .saveCourse(this.state.course);
+      .saveCourse(this.state.course)
+      .then(() => this.redirect());
+  }
 
+  redirect() {
     this.context
       .router
       .push('/courses');
