@@ -1,6 +1,7 @@
-import colors from 'colors';
-
 /* eslint-disable no-console */
 
-console.log('Starting app in dev mode...'.green);
+import 'colors';
+
+const message = 'Starting app in ' + process.env.NODE_ENV.bold.red + ' mode...'.green;
+console.log(message.green);
 
