@@ -14,7 +14,7 @@
     "build:remove-dist": "node_modules/.bin/rimraf ./dist",
     "build:html": "babel-node tools/buildHtml.js",
     "prebuild": "npm-run-all build:clean test lint build:html",
-    "build": "babel-node tools/build.js",
+    "build": "NODE_ENV=production babel-node tools/build.js -- -s",
     "postbuild": "babel-node tools/distServer.js"
   },
   "author": "Cory House",
