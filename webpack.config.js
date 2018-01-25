@@ -2,7 +2,9 @@ import webpack from 'webpack';
 import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const isDev = process.env.NODE_ENV !== 'production';
+
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production')
 };
@@ -19,8 +21,8 @@ export default {
       ] :
       [
         // production
-        path.resolve(__dirname, 'src/index')
-      ]
+      ],
+    path.resolve(__dirname, 'src/index')
   ],
   target: 'web',
   output: {
