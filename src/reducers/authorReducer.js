@@ -1,9 +1,3 @@
-/**
- *
- * @param state
- * @param action
- * @returns {*}
- */
 import {LOAD_AUTHORS_SUCCESS} from '../actions/actionTypes';
 import initialState from './initialState';
 
